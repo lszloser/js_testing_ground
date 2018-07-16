@@ -21,7 +21,8 @@ function draw() {
 
 function loop(timestamp) {
   var progress = (timestamp - lastRender)
-
+  
+  clear()
   draw()
   
   lastRender = timestamp
