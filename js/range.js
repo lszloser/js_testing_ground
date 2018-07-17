@@ -17,10 +17,12 @@ class Range {
     if (this.lifeTime < 20) {
       gctx.beginPath();
       gctx.setLineDash([5]);
+      gctx.lineWidth = 2;
       gctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
       gctx.closePath();
       gctx.strokeStyle = "rgba(255, 0, 0," + 1/this.lifeTime + ")";
-      gctx.stroke(); 
+      gctx.stroke();
+      gctx.restore(); 
     }
   }
 

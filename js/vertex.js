@@ -1,14 +1,14 @@
 
 class Vertex {
 
-  constructor(x, y, name) {
+  constructor(x, y, name, range) {
     this.x = x;
     this.y = y;
     this.isSelected = false;
     this.name = name;
     this.radius = 3;
     this.color = "blue";
-    this.allowedRange = new Range(this.x, this.y, 50, true);
+    this.allowedRange = new Range(this.x, this.y, range, true);
     this.label = new Label(this.x - 10, this.y - 15, this.name);
     //this.SelectedRange = new Range(this.x, this.y, 20, false);
   }
