@@ -50,6 +50,7 @@ class Graph {
   }
 
   closestVertex(e) {
+    console.log(this.vertices.map(ver => [Math.hypot(ver.x-e.x, ver.y-e.y), ver]).sort((a, b) => { return a[0] - b[0] }))
     return this.vertices.length > 0 ? this.vertices.map(ver => [Math.hypot(ver.x-e.x, ver.y-e.y), ver]).sort((a, b) => { return a[0] - b[0] })[0] : null;
   }
 

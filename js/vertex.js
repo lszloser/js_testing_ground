@@ -14,6 +14,11 @@ class Vertex {
     //this.SelectedRange = new Range(this.x, this.y, 20, false);
   }
 
+  update() {   
+    this.drawVisual();
+    this.drawLabel();
+  }
+
   drawVisual() {
     gctx.beginPath();
     gctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
@@ -23,26 +28,27 @@ class Vertex {
   }
 
   drawLabel() {
-    this.label.draw()
+    this.label.draw();
+    this.updateLabel();
   }
 
   draw() {
     this.drawVisual();
     this.drawLabel();
   }
-
-  update() {   
-    this.drawVisual();
-    this.drawLabel();
-  }
-
+  
   drawRange() {
     this.allowedRange.lifeTime = 0;
     this.updateRange();
   }
 
   updateRange() {
+    this.allowedRange.update(this.x,this.y)
     this.allowedRange.draw();
+  }
+
+  updateLabel() {
+    this.label.update(this.x-10,this.y-15)
   }
 
   select() {

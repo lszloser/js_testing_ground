@@ -13,4 +13,8 @@ class Label {
     gctx.fillText(this.text,this.x,this.y);
   }
 
+  update(x,y) {
+    this.x=x;
+    this.y=y;
+  }
 }
