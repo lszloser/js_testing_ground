@@ -101,6 +101,11 @@ class Graph {
     this.listEdges();
   }
 
+  clear() {
+    this.vertices=[];
+    this.edges=[];
+  }
+  
   update() {
     this.updateVertices();
     this.updateEdges();
