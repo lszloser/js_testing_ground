@@ -13,10 +13,32 @@ function clearGraph() {
   gctx.fillRect(0,0,graphCanvas.width,graphCanvas.height);
 }
 
-graphCanvas.addEventListener('click', function(e) {
-  selectedVertex = Vertex.select(e);
+
+
+graphCanvas.addEventListener('mousedown', function(e) {
+  //selectedVertex = Vertex.select(e);
   //console.log(selectedVertex);
   G.selectVertex(e);
+  G.selectedVertex.draged = true;
+});
+
+graphCanvas.addEventListener('mousemove', function(e) {
+  //selectedVertex = Vertex.select(e);
+  //console.log(selectedVertex);
+  if (G.selectedVertex != null) {
+    if (G.selectedVertex.draged) {
+      G.selectedVertex.x = e.x;
+      G.selectedVertex.y = e.y;
+    }
+  }
+});
+
+graphCanvas.addEventListener('mouseup', function(e) {
+  if (G.selectedVertex != null) {
+    G.selectedVertex.x = e.x;
+    G.selectedVertex.y = e.y;
+    G.selectedVertex.draged = false;
+  }
   G.createVertex(e);
 });
 

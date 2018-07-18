@@ -10,6 +10,7 @@ class Vertex {
     this.color = "blue";
     this.allowedRange = new Range(this.x, this.y, range, true);
     this.label = new Label(this.x - 10, this.y - 15, this.name);
+    this.draged = false;
     //this.SelectedRange = new Range(this.x, this.y, 20, false);
   }
 

@@ -12,7 +12,7 @@ class Edge {
   draw() {
     gctx.beginPath();
     gctx.setLineDash([])
-    gctx.lineWidth=this.weight;
+    gctx.lineWidth=0.5*this.weight;
     gctx.strokeStyle = "rgba(0, 0, 255, 1)";
     gctx.moveTo(this.v1.x,this.v1.y);
     gctx.lineTo(this.v2.x,this.v2.y);
