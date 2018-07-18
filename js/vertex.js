@@ -15,8 +15,8 @@ class Vertex {
   }
 
   update() {   
-    this.drawVisual();
-    this.drawLabel();
+    this.updateRange();
+    this.updateLabel();
   }
 
   drawVisual() {
@@ -35,16 +35,19 @@ class Vertex {
   draw() {
     this.drawVisual();
     this.drawLabel();
+    this.drawRange();
   }
   
   drawRange() {
-    this.allowedRange.lifeTime = 0;
-    this.updateRange();
+    this.allowedRange.draw();
   }
 
   updateRange() {
     this.allowedRange.update(this.x,this.y)
-    this.allowedRange.draw();
+  }
+
+  showRange() {
+    this.allowedRange.lifeTime = 0;
   }
 
   updateLabel() {
@@ -62,35 +65,5 @@ class Vertex {
     this.isSelected = true;
     this.color = "blue";
     this.radius = 3;
-  }
-
-  static addVertex(e) {
-    vertices.push(new Vertex(e.x,e.y,"V" + vertices.length.toString()));
-  }
-
-
-
-  static canAdd(e) {
-    return vertices.filter(ver => Math.hypot(ver.x-e.x, ver.y-e.y) < 50).map(ver => ver.drawRange()).length > 0 ? false : true;
-  }
-
-  static select(e) {
-    var selected = null;
-    vertices.forEach(function(ver) {
-      if (Math.hypot(ver.x-e.x, ver.y-e.y) < 20) {
-        selected = ver.select();
-      }
-      else {
-        ver.unSelect();
-      }
-    });
-    return selected;
-  }
-
-  static drawVertices() {
-    vertices.forEach(function(ver) {
-      ver.draw();
-      ver.allowedRange.draw();
-    });
   }
 }

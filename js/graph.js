@@ -39,7 +39,19 @@ class Graph {
   drawVertices() {
     this.vertices.forEach(function(ver) {
       ver.draw();
-      ver.allowedRange.draw();
+      //ver.allowedRange.draw();
+    });
+  }
+
+  updateVertices() {
+    this.vertices.forEach(function(ver) {
+      ver.update();
+    });
+  }
+
+  updateEdges() {
+    this.edges.forEach(function(edg) {
+      edg.update();
     });
   }
 
@@ -55,7 +67,7 @@ class Graph {
   }
 
   checkVertexRange(e) {
-    return this.vertices.filter(ver => Math.hypot(ver.x-e.x, ver.y-e.y) < this.drawRange).map(ver => ver.drawRange()).length > 0 ? false : true;
+    return this.vertices.filter(ver => Math.hypot(ver.x-e.x, ver.y-e.y) < this.drawRange).map(ver => ver.showRange()).length > 0 ? false : true;
   }
 
   selectVertex(e) {
@@ -92,6 +104,11 @@ class Graph {
   clear() {
     this.vertices=[];
     this.edges=[];
+  }
+  
+  update() {
+    this.updateVertices();
+    this.updateEdges();
   }
 
 }

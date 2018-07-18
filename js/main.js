@@ -31,7 +31,9 @@ graphCanvas.addEventListener('mousedown', function(e) {
   //selectedVertex = Vertex.select(e);
   //console.log(selectedVertex);
   G.selectVertex(e);
-  G.selectedVertex.draged = true;
+  if (G.selectedVertex != null) {
+    G.selectedVertex.draged = true;
+  }
 });
 
 graphCanvas.addEventListener('mousemove', function(e) {
@@ -58,10 +60,15 @@ function draw() {
   G.draw();
 }
 
+function update() {
+  G.update();
+}
+
 function loop(timestamp) {
   //var progress = (timestamp - lastRender)
 
   clearGraph()
+  update()
   draw()
   
   //lastRender = timestamp
