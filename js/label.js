@@ -9,12 +9,13 @@ class Label {
   }
 
   draw() {
+    gctx.fillStyle = this.color;
     gctx.font="12px Georgia";
     gctx.fillText(this.text,this.x,this.y);
   }
 
   update(x,y) {
-    this.x=x;
-    this.y=y;
+    this.x = x;
+    this.y = y;
   }
 }

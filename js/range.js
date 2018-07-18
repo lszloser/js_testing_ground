@@ -11,9 +11,6 @@ class Range {
   }
 
   draw() {
-    if (this.disap == true) {
-      this.lifeTime++;
-    }
     if (this.lifeTime < 20) {
       gctx.beginPath();
       gctx.setLineDash([5]);
@@ -27,8 +24,11 @@ class Range {
   }
 
   update(x,y) {
-    this.x=x;
-    this.y=y;
+    if (this.disap == true) {
+      this.lifeTime++;
+    }
+    this.x = x;
+    this.y = y;
   }
 
 }
