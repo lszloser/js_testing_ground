@@ -1,7 +1,7 @@
 
 class Graph {
 
-  constructor(vertices, edges, name, tx,ty) {
+  constructor(vertices, edges, name, tx,ty, isSimple) {
     this.vertices = vertices || [];
     this.edges = edges || [];
     this.name = name || "noname";
@@ -10,10 +10,24 @@ class Graph {
     this.selectedVertex = null;
     this.selectRange = 20;
     this.drawRange = 80;
+    this.isSimple = (typeof isSimple === 'undefined') ? true : isSimple;
   }
 
   createEdge(v1,v2) {
-    this.edges.push(new Edge(v1,v2, (this.edges.length * 2) + 1));
+    console.log(this.selfLoop(v1,v2));
+    if (this.isSimple) {
+      if (!this.edgeExists(v1,v2) && !this.selfLoop(v1,v2)) {
+        this.edges.push(new Edge(v1,v2, (this.edges.length * 2) + 1));
+      }
+    }
+  }
+
+  edgeExists(v1,v2) {
+    return this.edges.some(edg => (edg.v1 == v1 && edg.v2 == v2) || (edg.v1 == v2 && edg.v2 == v1));
+  }
+
+  selfLoop(v1,v2) {
+    return v1 == v2;
   }
 
   createVertex(e) {
