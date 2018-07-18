@@ -3,6 +3,7 @@ var graphCanvas = document.getElementById('graphCanvas');
 var gctx = graphCanvas.getContext('2d');
 var textCanvas = document.getElementById('textCanvas');
 var tctx = textCanvas.getContext('2d');
+var resetButton = document.getElementById("resetButton");
 var vertices = [];
 var selectedVertex;
 var i = 0;
@@ -13,6 +14,17 @@ function clearGraph() {
   gctx.fillRect(0,0,graphCanvas.width,graphCanvas.height);
 }
 
+function clearText() {
+  tctx.fillStyle = 'rgba(255, 255, 255,1)';
+  tctx.fillRect(0,0,textCanvas.width,textCanvas.height);
+}
+
+resetButton.addEventListener('click', function(e) {
+  //selectedVertex = Vertex.select(e);
+  console.log('clear');
+  G.clear();
+  clearText();
+});
 
 
 graphCanvas.addEventListener('mousedown', function(e) {
