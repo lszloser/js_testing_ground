@@ -33,7 +33,6 @@ class Edge {
     tctx.font="12px Georgia";
     tctx.fillStyle="black";
     tctx.fillText(this.name,x,y);
-    console.log(this.name);
   }
 
   update() {

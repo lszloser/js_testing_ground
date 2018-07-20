@@ -14,7 +14,6 @@ class Graph {
   }
 
   createEdge(v1,v2) {
-    console.log(this.selfLoop(v1,v2));
     if (this.isSimple) {
       if (!this.edgeExists(v1,v2) && !this.selfLoop(v1,v2)) {
         this.edges.push(new Edge(v1,v2, (this.edges.length * 2) + 1));
@@ -62,8 +61,7 @@ class Graph {
   }
 
   closestVertex(e) {
-    console.log(this.vertices.map(ver => [Math.hypot(ver.x-e.x, ver.y-e.y), ver]).sort((a, b) => { return a[0] - b[0] }))
-    return this.vertices.length > 0 ? this.vertices.map(ver => [Math.hypot(ver.x-e.x, ver.y-e.y), ver]).sort((a, b) => { return a[0] - b[0] })[0] : null;
+    return this.vertices.length > 0 ? this.vertices.map(ver => [Math.hypot(ver.x-e.x, ver.y-e.y), ver]).sort((a, b) => { return a[0] - b[0]; })[0] : null;
   }
 
   checkVertexRange(e) {

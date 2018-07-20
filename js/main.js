@@ -9,6 +9,8 @@ var selectedVertex;
 var i = 0;
 var G = new Graph([],[],"G1",10,10);
 
+
+
 function clearGraph() {
   gctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
   gctx.fillRect(0,0,graphCanvas.width,graphCanvas.height);
@@ -21,15 +23,27 @@ function clearText() {
 
 resetButton.addEventListener('click', function(e) {
   //selectedVertex = Vertex.select(e);
-  console.log('clear');
   G.clear();
   clearText();
 });
+
+graphCanvas.addEventListener('keydown', function(e) {
+  var code = e.key;
+  console.log(e);
+  switch (code) {
+      case "z": G.edges.pop(); break; //Left key
+      case 38: alert("Up"); break; //Up key
+      case 39: alert("Right"); break; //Right key
+      case 40: alert("Down"); break; //Down key
+  }
+}, false);
+
 
 
 graphCanvas.addEventListener('mousedown', function(e) {
   //selectedVertex = Vertex.select(e);
   //console.log(selectedVertex);
+  console.log("MOUSE DOWN");
   G.selectVertex(e);
   if (G.selectedVertex != null) {
     G.selectedVertex.draged = true;
@@ -49,8 +63,6 @@ graphCanvas.addEventListener('mousemove', function(e) {
 
 graphCanvas.addEventListener('mouseup', function(e) {
   if (G.selectedVertex != null) {
-    G.selectedVertex.x = e.x;
-    G.selectedVertex.y = e.y;
     G.selectedVertex.draged = false;
   }
   G.createVertex(e);
@@ -67,12 +79,12 @@ function update() {
 function loop(timestamp) {
   //var progress = (timestamp - lastRender)
 
-  clearGraph()
-  update()
-  draw()
+  clearGraph();
+  update();
+  draw();
   
   //lastRender = timestamp
-  window.requestAnimationFrame(loop)
+  window.requestAnimationFrame(loop);
 }
 //var lastRender = 0
-window.requestAnimationFrame(loop)
+window.requestAnimationFrame(loop);

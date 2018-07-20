@@ -1,4 +1,3 @@
-
 class Vertex {
 
   constructor(x, y, name, range) {
@@ -43,7 +42,7 @@ class Vertex {
   }
 
   updateRange() {
-    this.allowedRange.update(this.x,this.y)
+    this.allowedRange.update(this.x,this.y);
   }
 
   showRange() {
@@ -51,7 +50,7 @@ class Vertex {
   }
 
   updateLabel() {
-    this.label.update(this.x-10,this.y-15)
+    this.label.update(this.x-10,this.y-15);
   }
 
   select() {
