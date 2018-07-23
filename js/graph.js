@@ -11,6 +11,7 @@ class Graph {
     this.selectRange = 20;
     this.drawRange = 80;
     this.isSimple = (typeof isSimple === 'undefined') ? true : isSimple;
+    this.debug = false;
   }
 
   createEdge(v1,v2) {
@@ -29,9 +30,9 @@ class Graph {
     return v1 == v2;
   }
 
-  createVertex(e) {
-    if (this.checkVertexRange(e)) {
-      this.vertices.push(new Vertex(e.x,e.y,"V" + this.vertices.length.toString(),this.drawRange));
+  createVertex(x,y) {
+    if (this.checkVertexRange(x,y)) {
+      this.vertices.push(new Vertex(x,y,"V" + this.vertices.length.toString(),this.drawRange));
     }
   }
 
@@ -60,17 +61,23 @@ class Graph {
     });
   }
 
-  closestVertex(e) {
-    return this.vertices.length > 0 ? this.vertices.map(ver => [Math.hypot(ver.x-e.x, ver.y-e.y), ver]).sort((a, b) => { return a[0] - b[0]; })[0] : null;
+  drawDebug() {
+    this.vertices.forEach(function(ver) {
+      ver.drawDebug();
+    });
   }
 
-  checkVertexRange(e) {
-    return this.vertices.filter(ver => Math.hypot(ver.x-e.x, ver.y-e.y) < this.drawRange).map(ver => ver.showRange()).length > 0 ? false : true;
+  closestVertex(x,y) {
+    return this.vertices.length > 0 ? this.vertices.map(ver => [Math.hypot(ver.x-x, ver.y-y), ver]).sort((a, b) => { return a[0] - b[0]; })[0] : null;
   }
 
-  selectVertex(e) {
+  checkVertexRange(x,y) {
+    return this.vertices.filter(ver => Math.hypot(ver.x-x, ver.y-y) < this.drawRange).map(ver => ver.showRange()).length > 0 ? false : true;
+  }
+
+  selectVertex(x,y) {
     let distance, vertex;
-    [ distance, vertex ] = this.closestVertex(e) || [];
+    [ distance, vertex ] = this.closestVertex(x,y) || [];
     if (distance < this.selectRange) {
       if (this.selectedVertex != null) {
         //this.selectedVertex.unSelect();
@@ -96,7 +103,10 @@ class Graph {
   draw() {
     this.drawEdges();
     this.drawVertices();
-    this.listEdges();
+    if (this.debug) {
+      this.drawDebug();
+    }
+    //this.listEdges();
   }
 
   clear() {

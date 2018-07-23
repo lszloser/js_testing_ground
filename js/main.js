@@ -8,7 +8,9 @@ var vertices = [];
 var selectedVertex;
 var i = 0;
 var G = new Graph([],[],"G1",10,10);
-
+var mouseX, mouseY;
+var offsetX = graphCanvas.getBoundingClientRect().x;
+var offsetY = graphCanvas.getBoundingClientRect().y;
 
 
 function clearGraph() {
@@ -29,10 +31,9 @@ resetButton.addEventListener('click', function(e) {
 
 graphCanvas.addEventListener('keydown', function(e) {
   var code = e.key;
-  console.log(e);
   switch (code) {
       case "z": G.edges.pop(); break; //Left key
-      case 38: alert("Up"); break; //Up key
+      case "d": G.debug = !G.debug; break; //Up key
       case 39: alert("Right"); break; //Right key
       case 40: alert("Down"); break; //Down key
   }
@@ -43,8 +44,7 @@ graphCanvas.addEventListener('keydown', function(e) {
 graphCanvas.addEventListener('mousedown', function(e) {
   //selectedVertex = Vertex.select(e);
   //console.log(selectedVertex);
-  console.log("MOUSE DOWN");
-  G.selectVertex(e);
+  G.selectVertex(e.x - offsetX, e.y - offsetY);
   if (G.selectedVertex != null) {
     G.selectedVertex.draged = true;
   }
@@ -52,11 +52,12 @@ graphCanvas.addEventListener('mousedown', function(e) {
 
 graphCanvas.addEventListener('mousemove', function(e) {
   //selectedVertex = Vertex.select(e);
-  //console.log(selectedVertex);
+  mouseX = e.x;
+  mouseY = e.y;
   if (G.selectedVertex != null) {
     if (G.selectedVertex.draged) {
-      G.selectedVertex.x = e.x;
-      G.selectedVertex.y = e.y;
+      G.selectedVertex.x = e.x - offsetX;
+      G.selectedVertex.y = e.y - offsetY;
     }
   }
 });
@@ -65,10 +66,19 @@ graphCanvas.addEventListener('mouseup', function(e) {
   if (G.selectedVertex != null) {
     G.selectedVertex.draged = false;
   }
-  G.createVertex(e);
+  G.createVertex(e.x - offsetX, e.y - offsetY);
 });
 
+function drawMouseDebug() {
+  gctx.font="12px Georgia";
+  gctx.fillStyle="black";
+  gctx.fillText("x:" + mouseX + ", y:" + mouseY,mouseX + 5,mouseY + 10);
+}
+
 function draw() {
+  if (G.debug) {
+    drawMouseDebug();
+  }
   G.draw();
 }
 
