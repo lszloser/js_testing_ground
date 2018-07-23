@@ -1,12 +1,12 @@
 
 class Edge {
 
-  constructor(v1, v2, weight) {
-    this.weight = Math.floor(10*Math.random());
+  constructor(v1, v2) {
+    this.weight = 1 + Math.floor(10*Math.random());
     this.v1 = v1;
     this.v2 = v2;
     this.color = "rgba(0, 0, 255, 1)";
-    this.name = v1.name + " -- " + this.weight + " -- " + v2.name;
+    this.name = v1.name + " --- " + this.weight + " --- " + v2.name;
     this.middleX = (this.v1.x + this.v2.x)/2;
     this.middleY = (this.v1.y + this.v2.y)/2;
     this.linearCoef = (this.v2.y - this.v1.y)/(this.v2.x - this.v1.x);

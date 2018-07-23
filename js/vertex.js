@@ -26,6 +26,13 @@ class Vertex {
     gctx.fill();
   }
 
+  drawDebug() {
+    gctx.font="12px Georgia";
+    gctx.fillStyle="black";
+    gctx.fillText("x:" + this.x + ", y:" + this.y,this.x + 5,this.y + 10);
+
+  }
+
   drawLabel() {
     this.label.draw();
     this.updateLabel();
