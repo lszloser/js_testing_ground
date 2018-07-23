@@ -75,7 +75,27 @@ class Graph {
     return this.vertices.filter(ver => Math.hypot(ver.x-x, ver.y-y) < this.drawRange).map(ver => ver.showRange()).length > 0 ? false : true;
   }
 
-  selectVertex(x,y) {
+  mouseEvent(x,y) {
+    let distance, vertex;
+    [ distance, vertex ] = this.closestVertex(x,y) || [];
+    if (distance < this.selectRange) {
+      if (this.selectedVertex != null) {
+        //this.selectedVertex.unSelect();
+        this.createEdge(this.selectedVertex, vertex);
+        this.selectedVertex.unSelect();
+      }
+      this.selectedVertex = vertex.select();
+    }
+    else {
+      if (this.selectedVertex != null) {
+        this.selectedVertex.unSelect();
+        this.selectedVertex = null;
+      }
+      this.createVertex(x, y)
+    }
+  }
+
+  /*selectVertex(x,y) {
     let distance, vertex;
     [ distance, vertex ] = this.closestVertex(x,y) || [];
     if (distance < this.selectRange) {
@@ -92,7 +112,7 @@ class Graph {
         this.selectedVertex = null;
       }
     }
-  }
+  }*/
 
   listEdges() {
     for (const [i, edg] of this.edges.entries()) {

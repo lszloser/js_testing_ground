@@ -44,9 +44,15 @@ graphCanvas.addEventListener('keydown', function(e) {
 graphCanvas.addEventListener('mousedown', function(e) {
   //selectedVertex = Vertex.select(e);
   //console.log(selectedVertex);
-  G.selectVertex(e.x - offsetX, e.y - offsetY);
+  G.mouseEvent(e.x - offsetX, e.y - offsetY);
   if (G.selectedVertex != null) {
     G.selectedVertex.draged = true;
+  }
+});
+
+graphCanvas.addEventListener('mouseup', function(e) {
+  if (G.selectedVertex != null) {
+    G.selectedVertex.draged = false;
   }
 });
 
@@ -60,13 +66,6 @@ graphCanvas.addEventListener('mousemove', function(e) {
       G.selectedVertex.y = e.y - offsetY;
     }
   }
-});
-
-graphCanvas.addEventListener('mouseup', function(e) {
-  if (G.selectedVertex != null) {
-    G.selectedVertex.draged = false;
-  }
-  G.createVertex(e.x - offsetX, e.y - offsetY);
 });
 
 function drawMouseDebug() {
